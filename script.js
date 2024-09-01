@@ -52,3 +52,24 @@ gsap.fromTo(
       { y: "50px", opacity: 1, duration: 3, repeat: -1, yoyo: true, ease: 'power2.inOut' }
   );
   
+
+
+  document.addEventListener('DOMContentLoaded', function() {
+    var splashScreen = document.getElementById('splash');
+    var loadingAnimation = document.getElementById('loading');
+
+    // Show the splash screen with the logo
+    setTimeout(function() {
+        // Transition from logo to loading animation
+        document.querySelector('.logo').style.opacity = 0;
+        loadingAnimation.style.display = 'flex';
+        setTimeout(function() {
+            // After 3 seconds, show loading animation and start content transition
+            splashScreen.style.opacity = 0;
+            setTimeout(function() {
+                splashScreen.style.display = 'none';
+                document.querySelector('.content').style.display = 'block'; // Show content
+            }, 1000); // Allow time for the fade-out effect
+        }, 3000); // Show logo for 3 seconds
+    }, 0);
+});

@@ -5,9 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Coming Soon | Fasteox</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
 </head>
 <body>
+  <div class="overlay" id="splash">
+    <img src="fasteoxlogo.png" class="logo">
+    <div class="loading-animation" id="loading">
+        <div class="wrapper">
+            <div class="circle"></div>
+            <div class="circle"></div>
+            <div class="circle"></div>
+            <div class="shadow"></div>
+            <div class="shadow"></div>
+            <div class="shadow"></div>
+        </div>
+    </div>
+</div>
+
+
+  <div id="content">
     <div id="background"></div>
     <div class="container">
         <!-- Coming Soon Section -->
@@ -160,6 +177,7 @@
      
 
     </footer>
+ 
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/gsap.min.js"></script>
     <script src="script.js" defer></script>
