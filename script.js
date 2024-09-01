@@ -1,31 +1,54 @@
-if (document.referrer && !document.referrer.includes(window.location.hostname)) {
-    console.warn("You have been referred from an external domain: " + document.referrer);
-}
-if (window.location.protocol === 'https:') {
-    const mixedContent = [...document.querySelectorAll('img[src^="http://"], script[src^="http://"], link[href^="http://"]')];
-    if (mixedContent.length > 0) {
-        console.warn("Warning: Mixed content detected. This may compromise privacy.");
-    }
-}
-if (window.top !== window.self) {
-    console.warn("This page is being loaded in an iframe. This might be a security risk (clickjacking).");
-    // Optionally, break out of the iframe:
-    window.top.location = window.location;
-}
-Object.defineProperty(document, 'cookie', {
-    get: function() {
-        console.warn("Warning: An attempt to access cookies was detected.");
-        return '';
-    },
-    set: function(value) {
-        console.warn("Warning: An attempt to set a cookie was detected.");
-        return value;
-    }
-});
-const suspiciousKeywords = ['login', 'secure', 'account', 'webmail'];
-const url = window.location.href.toLowerCase();
-const isSuspicious = suspiciousKeywords.some(keyword => url.includes(keyword));
-
-if (isSuspicious) {
-    console.warn("Warning: The URL contains suspicious keywords that might indicate a phishing attempt.");
-}
+// Import GSAP library for animations
+gsap.fromTo(
+    "#coming-soon",
+    { opacity: 0, y: -100 },
+    { opacity: 1, y: 0, duration: 1, delay: 0.5, ease: 'power2.out' }
+  );
+  
+  // Define a function to cycle background colors
+  const colors = ['#1e3a8a', '#4b5563', '#7f1d1d', '#9d174d'];
+  let colorIndex = 0;
+  
+  function changeBackgroundColor() {
+    colorIndex = (colorIndex + 1) % colors.length;
+    gsap.to('#background', { backgroundColor: colors[colorIndex], duration: 8, onComplete: changeBackgroundColor });
+  }
+  
+  changeBackgroundColor();
+  
+  // Function to follow cursor with animations
+  const gamingAnimation = document.getElementById('gaming-animation');
+  const moneyAnimation = document.getElementById('money-animation');
+  
+  document.addEventListener('mousemove', (e) => {
+      const { clientX: mouseX, clientY: mouseY } = e;
+  
+      // Adjust the animations based on cursor position
+      gsap.to(gamingAnimation, {
+          x: mouseX - gamingAnimation.offsetWidth / 2,
+          y: mouseY - gamingAnimation.offsetHeight / 2,
+          duration: 0.5,
+          ease: 'power2.out'
+      });
+  
+      gsap.to(moneyAnimation, {
+          x: mouseX - moneyAnimation.offsetWidth / 2,
+          y: mouseY - moneyAnimation.offsetHeight / 2,
+          duration: 0.5,
+          ease: 'power2.out'
+      });
+  });
+  
+  // Animation to bring icons from the bottom
+  gsap.fromTo(
+      "#gaming-animation",
+      { y: "100vh", opacity: 0 },
+      { y: "50px", opacity: 1, duration: 3, repeat: -1, yoyo: true, ease: 'power2.inOut' }
+  );
+  
+  gsap.fromTo(
+      "#money-animation",
+      { y: "100vh", opacity: 0 },
+      { y: "50px", opacity: 1, duration: 3, repeat: -1, yoyo: true, ease: 'power2.inOut' }
+  );
+  
